@@ -1,5 +1,7 @@
 #### CMAP: a simple cli for adding colormaps to geotiffs
 
+---
+
 ###### INSTALL
 
 ```bash
@@ -7,9 +9,6 @@ git clone https://github.com/brookisme/cmap.git
 cd sublr
 pip install -e .
 ```
-
-
----
 
 ###### USAGE
 
