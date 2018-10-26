@@ -63,8 +63,13 @@ def generate(
     else:
         os.makedirs(os.path.dirname(path),exist_ok=True)
         with open(path,'w+') as file:
-            file.write("# {}\n".format(c.CONFIG_COMMENT))
+            file.write("#\n")
+            file.write("# {}\n".format(c.CONFIG_OPTIONS_COMMENT))
+            file.write("#\n")
             file.write(yaml.safe_dump(config, default_flow_style=False))
+            file.write("\n\n\n\n#\n")
+            file.write("# {}\n".format(c.CONFIG_CMAPS_COMMENT))
+            file.write("#\n\n\n\n")
         utils.log(c.CONFIG_CREATED)
 
 

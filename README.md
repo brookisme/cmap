@@ -2,14 +2,28 @@
 
 _CLI for adding color-maps to geotiffs_
 
-**WIP: DOCS TO COME**
+###### USAGE
+
+IMPORTANT NOTE: before using `cmap` you must [generate a config file](#config). 
+
+```
+Usage: cmap [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  add      add colormap to geotiff
+  add_dir  add colormap to geotiffs in dir
+  config   generate config file
+```
 
 ---
 
 ##### DOCS
 
-1. [add](#add): add cmap to a geotiff
-2. [add_dir](#add_dir): add cmap to all geotiffs in dir
+1. [add](#add): create geotiff with colormap for a single file
+2. [add_dir](#add_dir): create geotiffs with colormap for all geotiffs in a directory
 3. [config](#config): generate cmap config file 
 
 ---
@@ -19,7 +33,16 @@ _CLI for adding color-maps to geotiffs_
 ##### ADD
 
 ```
-$ cmap add src_path
+Usage: cmap add [OPTIONS] [CMAP] SRC
+
+  create tif with color map for a single file
+
+Options:
+  --dst TEXT      destination path: empty create name from src path
+  --ident TEXT    clr ident: filename.tif => filename.<ident>.tif
+  --folder TEXT   destination directory: if None use current directory
+  --band INTEGER  band index: if None use all bands
+  --help          Show this message and exit.
 ```
 
 
@@ -30,7 +53,17 @@ $ cmap add src_path
 ##### ADD DIR
 
 ```
-$ cmap add_dir .
+Usage: cmap add_dir [OPTIONS] [CMAP] DIR_PATH
+
+  create geotiffs with colormap for all geotiffs in a directory
+
+Options:
+  --dst TEXT      destination path: empty create name from src path
+  --ident TEXT    clr ident: filename.tif => filename.<ident>.tif
+  --folder TEXT   destination directory: if None use current directory
+  --band INTEGER  band index: if None use all bands
+  --ext TEXT      extension: defaluts to tif: use  "*.<ext>" to find files
+  --help          Show this message and exit.
 ```
 
 ---
@@ -39,9 +72,28 @@ $ cmap add_dir .
 
 ##### CONFIG
 
+NOTES:
+
+* config file(s) must be generated before using other `cmap`-cli methods
+* the config file contains:
+  - colormaps: cmaps dictionaries (and default cmap) added after generation. see example [config](https://github.com/brookisme/cmap/blob/master/example.cmap.config.yaml))
+  - option defaults
+* if a local config file is not present the `cmap`-cli will use the global config
 
 ```
-$ cmap config
+Usage: cmap config [OPTIONS]
+
+  generate local or global config file
+
+Options:
+  --force BOOLEAN          if true overwrite existing config
+  --global_config BOOLEAN  if true create global config otherwise local.
+                           defaults to False
+  --ext TEXT               default ext: config default is "tif"
+  --band INTEGER           default band: config default is None
+  --ident TEXT             default ident: config default is "clr"
+  --folder TEXT            default folder: config default is "clr"
+  --help                   Show this message and exit.
 ```
 
 

@@ -17,12 +17,28 @@ def cli(ctx):
 
 
 
-@click.command(help='add colormap to geotiff')
-@click.argument('src')
+
+""" ADD """
+@click.command(help='create tif with color map for a single file')
+@click.option(
+    '--dst',
+    default=None,
+    help='destination path: empty create name from src path')
+@click.option(
+    '--ident',
+    default=None,
+    help='clr ident: filename.tif => filename.<ident>.tif')
+@click.option(
+    '--folder',
+    default=None,
+    help='destination directory: if None use current directory')
+@click.option(
+    '--band',
+    default=None,
+    help='band index: if None use all bands',
+    type=int)
 @click.argument('cmap',default=None,required=False)
-@click.option('--dst',default=None,help='destination')
-@click.option('--band',default=None,help='band index',type=int)
-@click.option('--folder',default=None,help='directory')
+@click.argument('src')
 @click.pass_context
 def add(ctx,src,cmap=None,band=None,folder=None,ident=None,dst=None):
     core.add(src,cmap=cmap,band=band,folder=folder,ident=ident,dst=dst)
@@ -30,31 +46,75 @@ def add(ctx,src,cmap=None,band=None,folder=None,ident=None,dst=None):
 
 
 
-@click.command(help='add colormap to geotiffs in dir')
-@click.argument('dir_path')
+""" ADD DIR """
+@click.command(help='create geotiffs with colormap for all geotiffs in a directory')
+@click.option(
+    '--dst',
+    default=None,
+    help='destination path: empty create name from src path')
+@click.option(
+    '--ident',
+    default=None,
+    help='clr ident: filename.tif => filename.<ident>.tif')
+@click.option(
+    '--folder',
+    default=None,
+    help='destination directory: if None use current directory')
+@click.option(
+    '--band',
+    default=None,
+    help='band index: if None use all bands',
+    type=int)
+@click.option(
+    '--ext',
+    default=None,
+    help='extension: defaluts to tif: use  "*.<ext>" to find files')
 @click.argument('cmap',default=None,required=False)
-@click.option('--ext',default=None,help='extension: defaluts to tif')
-@click.option('--dst',default=None,help='destination')
-@click.option('--band',default=None,help='band index',type=int)
-@click.option('--folder',default=None,help='directory')
+@click.argument('dir_path')
 @click.pass_context
-def add_dir(ctx,dir_path,ext=None,cmap=None,band=None,folder=None,ident=None,dst=None):
+def add_dir(
+        ctx,
+        dir_path,
+        cmap=None,
+        ext=None,
+        band=None,
+        folder=None,
+        ident=None,
+        dst=None):
     core.add_dir(dir_path,cmap=cmap,band=band,folder=folder,ident=ident,dst=dst)
 
 
 
 
-@click.command(name='config',help='generate config file')
-@click.option('--folder',default=c.FOLDER)
-@click.option('--ident',default=c.IDENT)
-@click.option('--band',default=c.BAND)
-@click.option('--global_config',default=False)
-@click.option('--ext',default=c.EXT)
+""" GENERATE CONFIG """
+@click.command(name='config',help='generate local or global config file')
 @click.option(
     '--force',
     default=False,
     help='if true overwrite existing config',
     type=bool)
+@click.option(
+    '--global_config',
+    help='if true create global config otherwise local. defaults to False',
+    default=False,
+    type=bool)
+@click.option(
+    '--ext',
+    help='default ext: config default is "{}"'.format(c.EXT),
+    default=c.EXT)
+@click.option(
+    '--band',
+    default=c.BAND,
+    help='default band: config default is {}'.format(c.BAND),
+    type=int)
+@click.option(
+    '--ident',
+    help='default ident: config default is "{}"'.format(c.IDENT),
+    default=c.IDENT)
+@click.option(
+    '--folder',
+    help='default folder: config default is "{}"'.format(c.FOLDER),
+    default=c.FOLDER)
 def generate_config(
         folder=None,
         ident=None,
