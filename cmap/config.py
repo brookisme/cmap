@@ -10,7 +10,8 @@ import cmap.constants as c
 _DEFAULTS={
     'folder': c.FOLDER,
     'ident': c.IDENT,
-    'band': c.BAND
+    'band': c.BAND,
+    'ext': c.EXT
 }
 
 
@@ -35,21 +36,22 @@ def get(key):
 def generate(
         folder=c.FOLDER,
         ident=c.IDENT,
-        cmap_keys=[],
+        band=c.BAND,
+        ext=c.EXT,
         force=False):
     """ generate config file
     """
     config={
-        'folder':folder,
-        'ident':ident }
-    for cmap_key in cmap_keys:
-        config[cmap_key]={ 0: (0,0,0) }
+        'folder': c.FOLDER,
+        'ident': c.IDENT,
+        'band': c.BAND,
+        'ext': c.EXT }
     if not force and os.path.exists(c.CONFIG_PATH):
-        utils.print(c.CONFIG_EXISTS,level="ERROR")
+        utils.log(c.CONFIG_EXISTS,level="ERROR")
     else:
         with open(c.CONFIG_PATH,'w+') as file:
             file.write("# {}\n".format(c.CONFIG_COMMENT))
             file.write(yaml.safe_dump(config, default_flow_style=False))
-        utils.print(c.CONFIG_CREATED)
+        utils.log(c.CONFIG_CREATED)
 
 

@@ -1,3 +1,5 @@
+from __future__ import print_function
 
-def print(level,msg='info'):
+
+def log(msg,level='info'):
     print("[{}] CMAP: {}".format(level,msg))
