@@ -1,8 +1,16 @@
-##### SUBLIME REMOTE: A companion to SublimeSFTP
+### CMAP
 
-_CLI for adding color-maps to geotiffs_
+_a simple cli for adding colormaps to geotiffs_
 
-###### USAGE
+##### INSTALL
+
+```bash
+git clone https://github.com/brookisme/cmap.git
+cd sublr
+pip install -e .
+```
+
+##### USAGE
 
 IMPORTANT NOTE: before using `cmap` you must [generate a config file](#config). 
 
