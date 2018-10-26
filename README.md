@@ -8,7 +8,9 @@ cd sublr
 pip install -e .
 ```
 
-###### USAGE
+---
+
+##### DOCS
 
 IMPORTANT NOTE: before using `cmap` you must [generate a config file](#config). 
 
@@ -23,10 +25,6 @@ Commands:
   add_dir  add colormap to geotiffs in dir
   config   generate config file
 ```
-
----
-
-##### DOCS
 
 1. [add](#add): create geotiff with colormap for a single file
 2. [add_dir](#add_dir): create geotiffs with colormap for all geotiffs in a directory
