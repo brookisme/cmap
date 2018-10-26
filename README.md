@@ -74,11 +74,11 @@ Options:
 
 NOTES:
 
-* config file(s) must be generated before using other `cmap`-cli methods
+* config file(s) must be generated before using other `cmap` methods
 * the config file contains:
-  - colormaps: cmaps dictionaries (and default cmap) added after generation. see example [config](https://github.com/brookisme/cmap/blob/master/example.cmap.config.yaml))
+  - colormaps: cmaps dictionaries (and default cmap) added after generation. see [example](https://github.com/brookisme/cmap/blob/master/example.cmap.config.yaml).
   - option defaults
-* if a local config file is not present the `cmap`-cli will use the global config
+* if a local config file is not present the `cmap` will use the global config.
 
 ```
 Usage: cmap config [OPTIONS]
