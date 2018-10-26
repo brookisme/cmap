@@ -1,4 +1,5 @@
 import os.path
+from os.path import expanduser
 import yaml
 import cmap.utils as utils
 import cmap.constants as c
@@ -13,7 +14,10 @@ _DEFAULTS={
     'band': c.BAND,
     'ext': c.EXT
 }
-
+_GLOBAL_CONFIG_PATH="{}/{}/{}".format(
+        expanduser("~"),
+        c.GLOBAL_CONFIG_DIR,
+        c.CONFIG_PATH )
 
 #
 # LOAD CONFIG
@@ -21,7 +25,10 @@ _DEFAULTS={
 try:
     _CONFIG=yaml.safe_load(open(c.CONFIG_PATH))
 except:
-    _CONFIG=False
+    try:
+        _CONFIG=yaml.safe_load(open(_GLOBAL_CONFIG_PATH))
+    except:
+        _CONFIG=False
 
 
 def get(key):
@@ -38,6 +45,7 @@ def generate(
         ident=c.IDENT,
         band=c.BAND,
         ext=c.EXT,
+        global_config=False,
         force=False):
     """ generate config file
     """
@@ -46,10 +54,15 @@ def generate(
         'ident': c.IDENT,
         'band': c.BAND,
         'ext': c.EXT }
-    if not force and os.path.exists(c.CONFIG_PATH):
+    if global_config:
+        path=_GLOBAL_CONFIG_PATH
+    else:
+        path=c.CONFIG_PATH
+    if not force and os.path.exists(path):
         utils.log(c.CONFIG_EXISTS,level="ERROR")
     else:
-        with open(c.CONFIG_PATH,'w+') as file:
+        os.makedirs(os.path.dirname(path),exist_ok=True)
+        with open(path,'w+') as file:
             file.write("# {}\n".format(c.CONFIG_COMMENT))
             file.write(yaml.safe_dump(config, default_flow_style=False))
         utils.log(c.CONFIG_CREATED)

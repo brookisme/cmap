@@ -1,6 +1,8 @@
 """ CONSTANTS
 """
 CONFIG_PATH='cmap.config.yaml'
+GLOBAL_CONFIG_DIR='.cmap'
+
 #
 # DEFAULT CONFIG
 #

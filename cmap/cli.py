@@ -48,6 +48,7 @@ def add_dir(ctx,dir_path,ext=None,cmap=None,band=None,folder=None,ident=None,dst
 @click.option('--folder',default=c.FOLDER)
 @click.option('--ident',default=c.IDENT)
 @click.option('--band',default=c.BAND)
+@click.option('--global_config',default=False)
 @click.option('--ext',default=c.EXT)
 @click.option(
     '--force',
@@ -59,12 +60,14 @@ def generate_config(
         ident=None,
         band=None,
         ext=None,
+        global_config=False,
         force=False):
     cfig.generate(
         folder=folder,
         ident=ident,
         band=band,
         ext=ext,
+        global_config=global_config,
         force=force)
 
 
