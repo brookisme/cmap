@@ -13,7 +13,7 @@ pip install -e .
 
 ###### USAGE
 
-IMPORTANT NOTE: before using `cmap` you must [generate a config file](#config). 
+**NOTE**: Before using `cmap` you must [generate a config file](#config). 
 
 1. [add](#add): create geotiff with colormap for a single file
 2. [add_dir](#add_dir): create geotiffs with colormap for all geotiffs in a directory
