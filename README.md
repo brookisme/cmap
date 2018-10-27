@@ -1,4 +1,4 @@
-#### CMAP: a simple cli for adding colormaps to geotiffs
+#### CMAP: a simple cli for adding color-tables to geotiffs
 
 ---
 
@@ -14,8 +14,8 @@ pip install -e .
 
 **NOTE**: Before using `cmap` you must [generate a config file](#config). 
 
-1. [add](#add): create geotiff with colormap for a single file
-2. [add_dir](#add_dir): create geotiffs with colormap for all geotiffs in a directory
+1. [add](#add): create geotiff with color-table for a single file
+2. [add_dir](#add_dir): create geotiffs with color-table for all geotiffs in a directory
 3. [config](#config): generate cmap config file 
 
 ```
@@ -25,8 +25,8 @@ Options:
   --help  Show this message and exit.
 
 Commands:
-  add      add colormap to geotiff
-  add_dir  add colormap to geotiffs in dir
+  add      add color-table to geotiff
+  add_dir  add color-table to geotiffs in dir
   config   generate config file
 ```
 
@@ -59,7 +59,7 @@ Options:
 ```
 Usage: cmap add_dir [OPTIONS] [CMAP] DIR_PATH
 
-  create geotiffs with colormap for all geotiffs in a directory
+  create geotiffs with color-table for all geotiffs in a directory
 
 Options:
   --dst TEXT      destination path: empty create name from src path
@@ -80,7 +80,7 @@ NOTES:
 
 * config file(s) must be generated before using other `cmap` methods
 * the config file contains:
-  - colormaps and default: added after generation (see [example](https://github.com/brookisme/cmap/blob/master/example.cmap.config.yaml)).
+  - color-tables and default: added after generation (see [example](https://github.com/brookisme/cmap/blob/master/example.cmap.config.yaml)).
   - option defaults
 * if a local config file is not present the `cmap` will use the global config.
 

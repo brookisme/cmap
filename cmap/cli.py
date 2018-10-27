@@ -19,26 +19,26 @@ def cli(ctx):
 
 
 """ ADD """
-@click.command(help='create tif with color map for a single file')
-@click.option(
-    '--dst',
-    default=None,
-    help='destination path: empty create name from src path')
-@click.option(
-    '--ident',
-    default=None,
-    help='clr ident: filename.tif => filename.<ident>.tif')
-@click.option(
-    '--folder',
-    default=None,
-    help='destination directory: if None use current directory')
+@click.command(help='create geotiff with color-table for a single file')
+@click.argument('src')
+@click.argument('cmap',default=None,required=False)
 @click.option(
     '--band',
     default=None,
     help='band index: if None use all bands',
     type=int)
-@click.argument('cmap',default=None,required=False)
-@click.argument('src')
+@click.option(
+    '--folder',
+    default=None,
+    help='destination directory: if None use current directory')
+@click.option(
+    '--ident',
+    default=None,
+    help='clr ident: filename.tif => filename.<ident>.tif')
+@click.option(
+    '--dst',
+    default=None,
+    help='destination path: empty create name from src path')
 @click.pass_context
 def add(ctx,src,cmap=None,band=None,folder=None,ident=None,dst=None):
     core.add(src,cmap=cmap,band=band,folder=folder,ident=ident,dst=dst)
@@ -47,30 +47,30 @@ def add(ctx,src,cmap=None,band=None,folder=None,ident=None,dst=None):
 
 
 """ ADD DIR """
-@click.command(help='create geotiffs with colormap for all geotiffs in a directory')
+@click.command(help='create geotiffs with color-table for all geotiffs in a directory')
+@click.argument('dir_path')
+@click.argument('cmap',default=None,required=False)
 @click.option(
-    '--dst',
+    '--ext',
     default=None,
-    help='destination path: empty create name from src path')
-@click.option(
-    '--ident',
-    default=None,
-    help='clr ident: filename.tif => filename.<ident>.tif')
-@click.option(
-    '--folder',
-    default=None,
-    help='destination directory: if None use current directory')
+    help='extension: defaluts to tif: use  "*.<ext>" to find files')
 @click.option(
     '--band',
     default=None,
     help='band index: if None use all bands',
     type=int)
 @click.option(
-    '--ext',
+    '--folder',
     default=None,
-    help='extension: defaluts to tif: use  "*.<ext>" to find files')
-@click.argument('cmap',default=None,required=False)
-@click.argument('dir_path')
+    help='destination directory: if None use current directory')
+@click.option(
+    '--ident',
+    default=None,
+    help='clr ident: filename.tif => filename.<ident>.tif')
+@click.option(
+    '--dst',
+    default=None,
+    help='destination path: empty create name from src path')
 @click.pass_context
 def add_dir(
         ctx,
